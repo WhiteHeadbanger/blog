@@ -1,4 +1,4 @@
-from models.PostModel import PostModel
+from models.queries import get_post_by_id, get_post_by_uid, get_posts, create_post
 
 from uuid import uuid4
 
@@ -9,7 +9,7 @@ class PostController:
     
     @classmethod
     def get_posts(cls):
-        posts = PostModel.get_posts()
+        posts = get_posts()
         result = [
             {
                 'id': post.id,
@@ -22,22 +22,34 @@ class PostController:
 
         return {"count": len(result), "posts": result}
 
-    def get_post(self):
+    @classmethod
+    def get_post_by_id(cls):
         pass
 
-    def create(self, post_data):
+    @classmethod
+    def get_post_by_uid(cls, uid: str):
+        posts = get_post_by_uid(uid)
+        result = [
+            {
+                'id': post.id,
+                'uid': post.uid,
+                'title': post.title,
+                'body': post.body
+            }
+            for post in posts
+        ]
+
+        return {"count": len(result), "posts": result}
+
+    @classmethod
+    def create(cls, post_data):
         title = post_data['title']
         body = post_data['body']
         uid = post_data['uid']
 
-        new_post = PostModel(
-            id = str(uuid4()),
-            uid = uid,
-            title = title,
-            body = body
-        )
+        post = create_post(uid = uid, title = title, body = body)
 
-        new_post.create_post()
+        return post
 
     def edit(self):
         pass

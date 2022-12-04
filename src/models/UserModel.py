@@ -20,14 +20,6 @@ class UserModel(db.Model):
             'username': self.username,
             'password': self.password
         }
-
-    @classmethod
-    def get_users():
-        pass
-
-    @classmethod
-    def get_user():
-        pass
     
 
    

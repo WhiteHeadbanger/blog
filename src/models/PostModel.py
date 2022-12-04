@@ -23,15 +23,4 @@ class PostModel(db.Model):
             'title': self.title,
             'body': self.body
         }
-
-    @classmethod
-    def get_posts(cls):
-        return PostModel.query.all()
-
-    @classmethod
-    def get_post():
-        pass
-
-    def create_post(self):
-        db.session.add(self)
-        db.session.commit()
+        
