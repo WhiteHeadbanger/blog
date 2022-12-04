@@ -15,7 +15,7 @@ def get_posts():
         return jsonify({'data':str(e)}), 500
 
 @main.route('/<string:uid>', methods=['GET'])
-def get_post_by_uid(uid: int):
+def get_post_by_uid(uid: str):
     try:
         posts = PostController.get_post_by_uid(uid)
         return jsonify(posts)
@@ -31,17 +31,22 @@ def create_post():
     except Exception as e:
         return jsonify({'data':str(e)}), 500
 
-@main.route('/edit', methods=['POST'])
-def edit_post():
+@main.route('/edit/<string:id>', methods=['PUT'])
+def edit_post(id: str):
     try:
         data = request.get_json()
+        requested_post = PostController.get_post_by_id(id)
+        post = PostController.edit(post_data = data, post_obj = requested_post)
+        return jsonify(post)
     except Exception as e:
         return jsonify({'data':str(e)}), 500
 
-@main.route('/delete', methods=['POST'])
-def delete_post():
+@main.route('/delete/<string:id>', methods=['DELETE'])
+def delete_post(id: str):
     try:
-        data = request.get_json()
+        requested_post = PostController.get_post_by_id(id)
+        post = PostController.delete(post_obj = requested_post)
+        return jsonify(post)
     except Exception as e:
         return jsonify({'data':str(e)}), 500
 
