@@ -2,7 +2,7 @@ from flask_login import UserMixin
 from database.db import db
 from typing import Dict
 
-class UserModel(db.Model):
+class UserModel(UserMixin, db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.String(36), primary_key = True)

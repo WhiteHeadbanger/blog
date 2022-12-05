@@ -4,9 +4,6 @@ from uuid import uuid4
 
 class PostController:
     
-    def __init__(self):
-        pass
-    
     @classmethod
     def get_posts(cls):
         posts = get_posts()

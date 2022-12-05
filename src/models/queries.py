@@ -42,5 +42,17 @@ def delete_post(post_obj: pm.PostModel):
 def get_users():
     pass
 
-def get_user():
-    pass
+def get_user_by_username(username: str):
+    return um.UserModel.query.filter_by(username = username).first()
+
+def create_user(username: str, password: str):
+    new_user = um.UserModel(
+        id = str(uuid4()),
+        username = username,
+        password = password
+    )
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return new_user
