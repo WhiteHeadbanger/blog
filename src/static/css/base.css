@@ -1,0 +1,30 @@
+body {
+    background: #110f16;
+}
+
+.container {
+    color: white;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3em;
+}
+
+#intro {
+    /* Margin to fix overlapping fixed navbar */
+    margin-top: 58px;
+    /* background: #2a2c3b; */
+    color: white;
+}
+
+
+@media (max-width: 991px) {
+    #intro {
+    /* Margin to fix overlapping fixed navbar */
+    margin-top: 45px;
+    }
+}

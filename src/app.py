@@ -21,12 +21,12 @@ if __name__ == '__main__':
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from .models.UserModel import UserModel
+    from models.UserModel import UserModel
     
     @login_manager.user_loader
     def load_user(user_id):
         return UserModel.query.get(user_id)
-        
+
     # Migrate
     migrate = Migrate(app, db)
 

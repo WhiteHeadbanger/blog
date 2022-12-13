@@ -45,6 +45,9 @@ def get_users():
 def get_user_by_username(username: str):
     return um.UserModel.query.filter_by(username = username).first()
 
+def get_user_by_uid(uid: str):
+    return um.UserModel.query.filter_by(id = uid).first()
+
 def create_user(username: str, password: str):
     new_user = um.UserModel(
         id = str(uuid4()),

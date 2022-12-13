@@ -31,7 +31,7 @@ class UserController:
         if password != user.password:
             return {"data": "Passwords don't match!"}
         
-        return user.serialize()
+        return user
 
     @classmethod
     def logout(cls):

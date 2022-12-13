@@ -1,4 +1,4 @@
-from models.queries import get_post_by_id, get_post_by_uid, get_posts, create_post, edit_post, delete_post
+from models.queries import get_post_by_id, get_post_by_uid, get_posts, create_post, edit_post, delete_post, get_user_by_uid
 
 from uuid import uuid4
 
@@ -9,7 +9,7 @@ class PostController:
         posts = get_posts()
         result = [post.serialize() for post in posts]
 
-        return {"count": len(result), "posts": result}
+        return result
 
     @classmethod
     def get_post_by_id(cls, id: str, serialize: bool = False):
@@ -21,6 +21,7 @@ class PostController:
     @classmethod
     def get_post_by_uid(cls, uid: str):
         posts = get_post_by_uid(uid)
+        username = get_user_by_uid(uid)
         result = [
             {
                 'id': post.id,
@@ -31,7 +32,7 @@ class PostController:
             for post in posts
         ]
 
-        return {"count": len(result), "posts": result}
+        return result, username
 
     @classmethod
     def create(cls, post_data):
