@@ -68,7 +68,7 @@ def delete_post(id: str):
 @main.route('/profile')
 @login_required
 def profile():
-    pass
+    return render_template('profile.html')
 
 @main.route('/profile/update')
 @login_required

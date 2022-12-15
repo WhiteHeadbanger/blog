@@ -1,8 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 body {
-  background-color: #2a2c3b;
+  background-color: #110f16;
   font-family: "Lato", sans-serif;
+}
+
+.flashes {
+  list-style: none;
+  text-align: center;
+}
+
+.flashes li {
+  background-color: red;
 }
 
 .login-content {
@@ -16,7 +25,7 @@ body {
   margin-left: -200px;
   margin-top: -286px;
   border-radius: 8px;
-  background: #2f3242;
+  background: #191621;
 }
 
 .logo {
@@ -61,7 +70,7 @@ body {
   padding-top: 20px;
   border-radius: 0px 0px 5px 5px;
   color: white;
-  background: #2f3242;
+  background: #191621;
 }
 
 .nomember a {

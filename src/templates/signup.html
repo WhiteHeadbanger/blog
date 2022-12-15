@@ -11,13 +11,22 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="card login-content shadow-lg border-0">
+                {% with errors = get_flashed_messages(category_filter = ["error"]) %}
+                {% if errors %}
+                    <ul class=flashes>
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
                 <div class="card-body">
                     <div class="text-center">
                         <img class="logo" src="https://cdn3.iconfinder.com/data/icons/galaxy-open-line-gradient-i/200/account-256.png">
                     </div>
                     <h3 class="text-logo">Sign up!</h3>
                     <br>
-                    <form class="text-center">
+                    <form class="text-center" action="{{ url_for('auth.signup') }}" method="post">
                         <input class="form-control border-0" type="text" name="username" placeholder="Username">
                         <br>
                         <input class="form-control border-0" type="password" name="password" placeholder="Password">

@@ -32,22 +32,25 @@
                             <a class="nav-link" href="{{ url_for('blog_blueprint.index') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('blog_blueprint.profile') }}">Profile</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('blog_blueprint.about') }}">About</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
+                        {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('blog_blueprint.profile') }}">{{ current_user.username }} </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                        </li>
+                        {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -61,7 +64,6 @@
         
     </header>
     
-
     <!--Main layout-->
     <main class="my-5">
         <div class="container">

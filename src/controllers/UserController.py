@@ -1,4 +1,6 @@
 from models.queries import get_user_by_username, create_user
+from exceptions.signup_exceptions import SignUpPasswordsDontMatchError, SignUpUserAlreadyExistsError
+from exceptions.login_exceptions import LoginUserNotFoundError, LoginWrongPasswordError
 
 class UserController:
 
@@ -6,14 +8,14 @@ class UserController:
     def signup(cls, data):
         username = data['username']
         password = data['password']
-        password_confirmation = data['password_confirmation']
+        password_confirmation = data['password-confirmation']
 
         user = get_user_by_username(username)
         if user:
-            return {"data": f"Username {username} already exists!"}
+            raise SignUpUserAlreadyExistsError(message = f"Username {username} already exists!")
         
         if password != password_confirmation:
-            return {"data": "Passwords don't match!"}
+            raise SignUpPasswordsDontMatchError(message = "Passwords don't match!")
         
         user = create_user(username, password)
 
@@ -26,10 +28,10 @@ class UserController:
 
         user = get_user_by_username(username)
         if not user:
-            return {"data": f"Username {username} doesn't exist!"}
+            raise LoginUserNotFoundError(message = f"Username {username} doesn't exist!")
         
         if password != user.password:
-            return {"data": "Passwords don't match!"}
+            raise LoginWrongPasswordError(message = "Passwords don't match!")
         
         return user
 
