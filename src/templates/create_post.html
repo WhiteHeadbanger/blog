@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/editor.css') }}">
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+<script src="{{ url_for('static', filename='js/raw-html.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simple-image.js') }}"></script>
+<script src="{{ url_for('static', filename='js/checklist.js') }}"></script>
+<script src="{{ url_for('static', filename='js/list.js') }}"></script>
+<script src="{{ url_for('static', filename='js/embed.js') }}"></script>
+<script src="{{ url_for('static', filename='js/quote.js') }}"></script>
+<script src="{{ url_for('static', filename='js/underline.js') }}"></script>
+<script src="{{ url_for('static', filename='js/inline-code.js') }}"></script>
+<script src="{{ url_for('static', filename='js/code-block.js') }}"></script>
+<script src="{{ url_for('static', filename='js/paragraph.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>New article</h1>
+<div id="editorjs"></div>
+<button>Post</button>
+<style>
+    #editorjs {
+        border-style: solid;
+        border-color: rgb(57, 57, 57);
+        border-width: 1px;
+        background-color: rgb(18, 18, 18);
+    }
+</style>
+<script>
+
+    const editor = new EditorJS({
+        holder: 'editorjs',
+
+        tools: {
+            header: {
+                class: Header,
+                inlineToolbar: ['link']
+            },
+            raw: RawTool,
+            image: SimpleImage,
+            checklist: {
+                class: Checklist,
+                inlineToolbar: true,
+            },
+            list: {
+                class: List,
+                inlineToolbar: true,
+                config: {
+                    defaultStyle: 'unordered'
+                }
+            },
+            ordered_list: {
+                class: List,
+                inlineToolbar: true,
+                config: {
+                    defaultStyle: 'ordered'
+                }
+            },
+            embed: {
+                class: Embed,
+                inlineToolbar: true,
+                config: {
+                    services: {
+                        youtube: true,
+                        twitter: true,
+                        gfycat: true,
+                        imgur: true,
+                        codepen: true,
+                        pinterest: true
+                    }
+                }
+            },
+            quote: {
+                class: Quote,
+                inlineToolbar: true,
+                config: {
+                    quotePlaceholder: 'Quote here...',
+                    captionPlaceholder: 'Author...'
+                }
+            },
+            underline: Underline,
+            inlineCode: {
+                class: InlineCode
+            },
+            code: CodeTool,
+            paragraph: {
+                class: Paragraph,
+                inlineToolbar: true,
+            },
+        },
+    });
+</script>
+{% endblock %}

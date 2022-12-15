@@ -30,6 +30,10 @@ def get_post_by_uid(uid: str):
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
+@main.route('/create', methods=['GET'])
+def create():
+    return render_template('create_post.html')
+
 @main.route('/create', methods=['POST'])
 @login_required
 def create_post():

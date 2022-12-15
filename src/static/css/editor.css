@@ -1,0 +1,29 @@
+.ce-toolbar__plus {
+    color: rgb(218, 218, 218);
+}
+
+.ce-toolbar__settings-btn {
+    color: rgb(218, 218, 218);
+}
+
+.ce-inline-toolbar {
+    background-color: rgb(55, 54, 54);
+    color: rgb(255, 255, 255);
+}
+
+.ce-popover {
+    background-color: rgb(39, 39, 39);
+}
+
+.ce-popover__item {
+    background-color: rgb(67, 67, 67);
+    color: black;
+}
+
+.ce-toolbox {
+    color: black;
+}
+
+.ce-popover__item-label {
+    color: black;
+}
