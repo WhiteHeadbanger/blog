@@ -1,26 +1,26 @@
-from flask_login import UserMixin
+from sqlalchemy.dialects.postgresql import JSON
 from database.db import db
-from typing import Dict
+from typing import Dict, Any
 
-class PostModel(db.Model):
-    __tablename__ = 'post'
+class ArticleModel(db.Model):
+    __tablename__ = 'article'
 
     id = db.Column(db.String(36), primary_key=True)
     uid = db.Column(db.String(36), db.ForeignKey('user.id'), nullable=False)
     title = db.Column(db.String())
-    body = db.Column(db.String())
+    html = db.Column(db.String())
 
-    def __init__(self, id: str = None, uid: str = None, title: str = None, body: str = None) -> None:
+    def __init__(self, id: str = None, uid: str = None, title: str = None, html_data: str = None) -> None:
         self.id = id
         self.uid = uid
         self.title = title
-        self.body = body
+        self.html = html_data
 
     def serialize(self) -> Dict[str, str]:
         return {
             'id': self.id,
             'uid': self.uid,
             'title': self.title,
-            'body': self.body
+            'html': self.html
         }
         

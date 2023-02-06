@@ -1,0 +1,16 @@
+hr {
+    width: 30%;
+    text-align: center;
+    margin: auto;
+}
+
+.article-container {
+    margin: auto;
+    /* border: 1px solid green; */
+    padding: 10px;
+    text-align: center;
+}
+
+#parsed-content {
+    /* border: 1px solid red; */
+}
