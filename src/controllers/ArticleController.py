@@ -35,8 +35,8 @@ class ArticleController:
         return result, username
 
     @classmethod
-    def create(cls, uid, title, html_data):
-        article = create_article(uid = uid, title = title, html_data = html_data)
+    def create(cls, uid, title, json_data):
+        article = create_article(uid = uid, title = title, json_data = json_data)
 
         return article
 

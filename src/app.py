@@ -16,6 +16,8 @@ if __name__ == '__main__':
     #database
     db.init_app(app)
 
+    
+
     # Flask-login
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

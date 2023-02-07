@@ -12,12 +12,12 @@ def get_article_by_id(id: str):
 def get_article_by_uid(uid: str):
     return am.ArticleModel.query.filter_by(uid = uid).all()
 
-def create_article(uid: str, title: str, html_data: str):
+def create_article(uid: str, title: str, json_data: str):
     new_article = am.ArticleModel(
         id = str(uuid4()),
         uid = uid,
         title = title,
-        html_data = html_data
+        json_data = json_data
     )
     
     db.session.add(new_article)

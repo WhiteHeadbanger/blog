@@ -4,6 +4,7 @@
 <meta id="html_parsed_data" data-html="{{ html }}">
 <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/article.css') }}">
 <script src="{{ url_for('static', filename='js/editorjs-html.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-parser@1/build/Parser.browser.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +16,13 @@
 </div>
 
 <script>
-    var html_data = `{{ html|safe }}`
-    document.getElementById('parsed-content').innerHTML = html_data;
+    var json_data = {{ json_data|safe }}
+
+    const parser = new edjsParser();
+    const markup = parser.parse(json_data);
+
+    console.log(markup)
+
+    document.getElementById('parsed-content').innerHTML = markup;
 </script>
 {% endblock %}

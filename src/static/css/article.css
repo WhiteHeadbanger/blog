@@ -4,6 +4,18 @@ hr {
     margin: auto;
 }
 
+ul {
+    display: block;
+    float: left;
+    margin: 2em;
+}
+
+ol {
+    display: block;
+    float: left;
+    margin: 2em;
+}
+
 .article-container {
     margin: auto;
     /* border: 1px solid green; */
@@ -12,5 +24,30 @@ hr {
 }
 
 #parsed-content {
-    /* border: 1px solid red; */
+    /* position: absolute; */
+}
+
+pre {
+    background: #333;
+    white-space: pre;
+    word-wrap: break-word;
+    overflow: auto;
+    /* margin: 20px 25px; */
+    margin: 1em auto;
+    border-radius: 4px;
+    border: 1px solid #555;
+    position: relative;
+    width: 35em;
+    
+}
+
+pre code {
+    font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+    display: block;
+    margin-left: -20em;
+    padding: 15px 16px 14px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 19px;
+    color: #ddd;
 }

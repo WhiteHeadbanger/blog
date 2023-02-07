@@ -1,8 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, Response, session
 from flask_login import login_required, current_user
 
-from utils.parse_json_to_html import parse_html
-
 import traceback
 
 # Controllers
@@ -37,7 +35,7 @@ def get_article_by_uid(uid: str):
 def get_article_by_id(id: str):
     try:
         article = ArticleController.get_article_by_id(id)
-        return render_template('article.html', title=article.title, html=article.html)
+        return render_template('article.html', title=article.title, json_data=article.json)
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -54,7 +52,7 @@ def create_article_post():
         data = session["new_article_data"]
         title = request.form.get("article-title")
         uid = current_user.id
-        article = ArticleController.create(uid = uid, title = title, html_data = data)
+        article = ArticleController.create(uid = uid, title = title, json_data = data)
         return redirect(url_for('blog_blueprint.index'))
     except Exception as e:
         print(traceback.format_exc())
@@ -65,8 +63,8 @@ def create_article_post():
 def fetch_new_article_data():
     try:
         data = request.get_json()
-        parsed_html = parse_html(data)
-        session["new_article_data"] = parsed_html
+        session["new_article_data"] = ""
+        session["new_article_data"] = data
         return redirect(url_for('blog_blueprint.create_article_post'))
     except Exception as e:
         print(traceback.format_exc())
