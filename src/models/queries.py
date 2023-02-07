@@ -12,12 +12,13 @@ def get_article_by_id(id: str):
 def get_article_by_uid(uid: str):
     return am.ArticleModel.query.filter_by(uid = uid).all()
 
-def create_article(uid: str, title: str, json_data: str):
+def create_article(uid: str, title: str, json_data: str, brief_description: str):
     new_article = am.ArticleModel(
         id = str(uuid4()),
         uid = uid,
         title = title,
-        json_data = json_data
+        json_data = json_data,
+        brief_description = brief_description
     )
     
     db.session.add(new_article)
@@ -48,11 +49,13 @@ def get_user_by_username(username: str):
 def get_user_by_uid(uid: str):
     return um.UserModel.query.filter_by(id = uid).first()
 
-def create_user(username: str, password: str):
+def create_user(username: str, first_name: str, last_name: str, password: str):
     new_user = um.UserModel(
         id = str(uuid4()),
         username = username,
-        password = password
+        password = password,
+        first_name = first_name,
+        last_name = last_name
     )
 
     db.session.add(new_user)

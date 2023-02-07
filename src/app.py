@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 from config import config
 from database.db import db
 
@@ -8,6 +9,7 @@ from database.db import db
 from routes import blog, auth
 
 app = Flask(__name__)
+_bcrypt = Bcrypt(app)
 
 if __name__ == '__main__':
     # Config
@@ -15,8 +17,6 @@ if __name__ == '__main__':
 
     #database
     db.init_app(app)
-
-    
 
     # Flask-login
     login_manager = LoginManager()
@@ -35,4 +35,5 @@ if __name__ == '__main__':
     # Blueprints
     app.register_blueprint(blog.main, url_prefix='/blog')
     app.register_blueprint(auth.auth, url_prefix='/auth')
+
     app.run()

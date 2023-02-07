@@ -19,7 +19,7 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
-            {% endwith %}
+                {% endwith %}
                 <div class="card-body">
                     <div class="text-center">
                         <img class="logo" src="https://cdn3.iconfinder.com/data/icons/galaxy-open-line-gradient-i/200/account-256.png">
@@ -28,6 +28,10 @@
                     <br>
                     <form class="text-center" action="{{ url_for('auth.signup') }}" method="post">
                         <input class="form-control border-0" type="text" name="username" placeholder="Username">
+                        <br>
+                        <input class="form-control border-0" type="text" name="first-name" placeholder="First Name">
+                        <br>
+                        <input class="form-control border-0" type="text" name="last-name" placeholder="Last Name">
                         <br>
                         <input class="form-control border-0" type="password" name="password" placeholder="Password">
                         <br>

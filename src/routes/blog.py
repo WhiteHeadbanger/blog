@@ -17,7 +17,7 @@ main = Blueprint('blog_blueprint', __name__)
 def index():
     try:
         articles = ArticleController.get_articles()
-        return render_template('index.html', articles=articles)
+        return render_template('index.html', articles = articles)
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -35,7 +35,7 @@ def get_article_by_uid(uid: str):
 def get_article_by_id(id: str):
     try:
         article = ArticleController.get_article_by_id(id)
-        return render_template('article.html', title=article.title, json_data=article.json)
+        return render_template('article.html', title = article.title, json_data = article.json)
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -51,8 +51,9 @@ def create_article_post():
     try:
         data = session["new_article_data"]
         title = request.form.get("article-title")
+        brief = request.form.get("brief-description")
         uid = current_user.id
-        article = ArticleController.create(uid = uid, title = title, json_data = data)
+        article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
         return redirect(url_for('blog_blueprint.index'))
     except Exception as e:
         print(traceback.format_exc())

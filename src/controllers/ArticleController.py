@@ -27,7 +27,9 @@ class ArticleController:
                 'id': article.id,
                 'uid': article.uid,
                 'title': article.title,
-                'html': article.html
+                'json': article.json,
+                'brief': article.brief,
+                'date': article.date
             }
             for article in articles
         ]
@@ -35,8 +37,8 @@ class ArticleController:
         return result, username
 
     @classmethod
-    def create(cls, uid, title, json_data):
-        article = create_article(uid = uid, title = title, json_data = json_data)
+    def create(cls, uid, title, json_data, brief_description):
+        article = create_article(uid = uid, title = title, json_data = json_data, brief_description = brief_description)
 
         return article
 
