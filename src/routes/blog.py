@@ -35,7 +35,7 @@ def get_article_by_uid(uid: str):
 def get_article_by_id(id: str):
     try:
         article = ArticleController.get_article_by_id(id)
-        return render_template('article.html', title = article.title, json_data = article.json)
+        return render_template('article.html', title = article.title, json_data = article.json, id = id)
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -71,13 +71,18 @@ def fetch_new_article_data():
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
-@main.route('/edit/<string:id>', methods=['PUT'])
+@main.route('/edit/<string:id>', methods=['GET'])
 @login_required
 def edit_article(id: str):
+    requested_article = ArticleController.get_article_by_id(id)
+    return render_template('edit_article.html', article = requested_article)
+
+@main.route('/edit/<string:id>', methods=['PUT'])
+@login_required
+def edit_article_post(article):
     try:
         data = request.get_json()
-        requested_article = ArticleController.get_article_by_id(id)
-        article = ArticleController.edit(article_data = data, article_obj = requested_article)
+        #article = ArticleController.edit(article_data = data, article_obj = requested_article)
         return jsonify(article)
     except Exception as e:
         print(traceback.format_exc())

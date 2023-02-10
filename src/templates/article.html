@@ -5,14 +5,19 @@
 <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/article.css') }}">
 <script src="{{ url_for('static', filename='js/editorjs-html.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/editorjs-parser@1/build/Parser.browser.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/highlight-dark.min.css')}}">
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="article-container">
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('blog_blueprint.edit_article', id=id)}}">Edit</a>
+    {% endif %}
     <h1>{{ title }}</h1>
     <hr>
     <br>
-    <div id="parsed-content"></div>
+    <div class="parsed-container" id="parsed-content"></div>
 </div>
 
 <script>
@@ -24,5 +29,7 @@
     console.log(markup)
 
     document.getElementById('parsed-content').innerHTML = markup;
+
+    hljs.highlightAll();
 </script>
 {% endblock %}

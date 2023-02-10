@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/editor.css') }}">
+<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/create_article.css') }}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/header.js') }}"></script>
+<script src="{{ url_for('static', filename='js/raw-html.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simple-image.js') }}"></script>
+<script src="{{ url_for('static', filename='js/checklist.js') }}"></script>
+<script src="{{ url_for('static', filename='js/list.js') }}"></script>
+<script src="{{ url_for('static', filename='js/embed.js') }}"></script>
+<script src="{{ url_for('static', filename='js/quote.js') }}"></script>
+<script src="{{ url_for('static', filename='js/underline.js') }}"></script>
+<script src="{{ url_for('static', filename='js/inline-code.js') }}"></script>
+<script src="{{ url_for('static', filename='js/code-block.js') }}"></script>
+<script src="{{ url_for('static', filename='js/paragraph.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<form action="{{ url_for('blog_blueprint.create_article_post') }}" method="post">
+    <input type="text" class="article-title" id="article-title" name="article-title" placeholder="New Article">
+    <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
+    <div id="editorjs"></div>
+    <br>
+    <button onclick="Save()">Save</button>
+</form>
+<style>
+    #editorjs {
+        border-style: solid;
+        border-color: rgb(57, 57, 57);
+        border-width: 1px;
+        background-color: rgb(18, 18, 18);
+    }
+</style>
+<script>
+
+    var editor = new EditorJS({
+        holder: 'editorjs',
+
+        tools: {
+            header: {
+                class: Header,
+                inlineToolbar: ['link']
+            },
+            raw: RawTool,
+            image: SimpleImage,
+            checklist: {
+                class: Checklist,
+                inlineToolbar: true,
+            },
+            list: {
+                class: List,
+                inlineToolbar: true,
+                config: {
+                    defaultStyle: 'unordered'
+                }
+            },
+            embed: {
+                class: Embed,
+                inlineToolbar: true,
+                config: {
+                    services: {
+                        youtube: true,
+                        twitter: true,
+                        gfycat: true,
+                        imgur: true,
+                        codepen: true,
+                        pinterest: true
+                    }
+                }
+            },
+            quote: {
+                class: Quote,
+                inlineToolbar: true,
+                config: {
+                    quotePlaceholder: 'Quote here...',
+                    captionPlaceholder: 'Author...'
+                }
+            },
+            underline: Underline,
+            inlineCode: {
+                class: InlineCode
+            },
+            code: CodeTool,
+            paragraph: {
+                class: Paragraph,
+                inlineToolbar: true,
+            },
+        },
+    });
+
+    // Fill title and description elements with existing article content
+    var title_element = document.getElementById('article-title')
+    var description_element = document.getElementById('brief-description')
+
+    var title_text = `{{ article.title|safe }}` 
+    var description_text = `{{ article.brief_description|safe }}`
+    var blocks_data = {{ article.json|safe }} 
+
+    title_element.value = title_text
+    description_element.innerText = description_text
+
+    editor.isReady
+        .then(() => {
+            // Fill Editor with blocks data in json
+            editor.blocks.render(blocks_data)
+        })
+        .catch((reason) => {
+            console.log(`Editor.js initialization failed because of ${reason}`)
+        });
+
+    /* 
+
+     */
+    
+</script>
+<script>
+    function Save() {
+        editor.save().then((outputData) => {
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(outputData),
+                dataType: 'json',
+                url: 'http://127.0.0.1:5000/blog/fetch-data',
+                success: function (e) {
+                    console.log('success callback called');
+                    console.log(e);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    };
+</script>
+{% endblock %}
