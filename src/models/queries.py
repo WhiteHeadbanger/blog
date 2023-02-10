@@ -26,12 +26,14 @@ def create_article(uid: str, title: str, json_data: str, brief_description: str)
 
     return new_article.serialize()
 
-def edit_article(article_obj: am.ArticleModel, title: str = None, body: str = None):
-    article_obj.title = title
-    article_obj.body = body
+def edit_article(title: str = None, brief_description: str = None, json = None, article_id: str = None):
+    article = get_article_by_id(article_id)
+    article.title = title
+    article.brief_description = brief_description
+    article.json = json
     db.session.commit()
 
-    return article_obj.serialize()
+    return article.serialize()
 
 def delete_article(article_obj: am.ArticleModel):
     article = article_obj.serialize()

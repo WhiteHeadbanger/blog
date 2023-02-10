@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<form action="{{ url_for('blog_blueprint.create_article_post') }}" method="post">
+<form action="{{ url_for('blog_blueprint.edit_article_put') }}" method="GET">
     <input type="text" class="article-title" id="article-title" name="article-title" placeholder="New Article">
     <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
     <div id="editorjs"></div>
@@ -28,9 +28,7 @@
 </form>
 <style>
     #editorjs {
-        border-style: solid;
-        border-color: rgb(57, 57, 57);
-        border-width: 1px;
+        border: 1px solid rgb(57, 57, 57);
         background-color: rgb(18, 18, 18);
     }
 </style>
@@ -120,7 +118,7 @@
     function Save() {
         editor.save().then((outputData) => {
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(outputData),
                 dataType: 'json',
@@ -130,6 +128,7 @@
                     console.log(e);
                 },
                 error: function(error) {
+                    console.log("Hubo un error")
                     console.log(error);
                 }
             });

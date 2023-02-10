@@ -43,11 +43,8 @@ class ArticleController:
         return article
 
     @classmethod
-    def edit(cls, article_data, article_obj):
-        title = article_data['title']
-        body = article_data['body']
-
-        article = edit_article(article_obj = article_obj, title = title, body = body)
+    def edit(cls, title, brief_description, json_data, article_id):
+        article = edit_article(title = title, brief_description = brief_description, json = json_data, article_id = article_id)
 
         return article
     

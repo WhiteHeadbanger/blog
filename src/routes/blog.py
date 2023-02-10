@@ -54,7 +54,29 @@ def create_article_post():
         brief = request.form.get("brief-description")
         uid = current_user.id
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
-        return redirect(url_for('blog_blueprint.index'))
+        return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
+    except Exception as e:
+        print(traceback.format_exc())
+        return jsonify({'data':str(e)}), 500
+
+@main.route('/edit/<string:id>', methods=['GET'])
+@login_required
+def edit_article(id: str):
+    article = ArticleController.get_article_by_id(id)
+    session["article_id"] = article.id
+    return render_template('edit_article.html', article = article)
+
+@main.route('/edit', methods=['GET','PUT'])
+@login_required
+def edit_article_put():
+    try:
+        title = request.args.get("article-title")
+        brief = request.args.get("brief-description")
+        data = session["edited_article_data"]
+        article_id = session["article_id"]
+        session["article_to_edit_object"] = ""
+        article = ArticleController.edit(title = title, brief_description = brief, json_data = data, article_id = article_id)
+        return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -71,22 +93,19 @@ def fetch_new_article_data():
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
-@main.route('/edit/<string:id>', methods=['GET'])
+@main.route('/fetch-data', methods=['PUT'])
 @login_required
-def edit_article(id: str):
-    requested_article = ArticleController.get_article_by_id(id)
-    return render_template('edit_article.html', article = requested_article)
-
-@main.route('/edit/<string:id>', methods=['PUT'])
-@login_required
-def edit_article_post(article):
+def fetch_edited_article_data():
     try:
         data = request.get_json()
-        #article = ArticleController.edit(article_data = data, article_obj = requested_article)
-        return jsonify(article)
+        session["edited_article_data"] = ""
+        session["edited_article_data"] = data
+        return redirect(url_for('blog_blueprint.edit_article_put'))
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
+
+
 
 @main.route('/delete/<string:id>', methods=['DELETE'])
 @login_required
