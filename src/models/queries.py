@@ -35,9 +35,9 @@ def edit_article(title: str = None, brief_description: str = None, json = None, 
 
     return article.serialize()
 
-def delete_article(article_obj: am.ArticleModel):
-    article = article_obj.serialize()
-    db.session.delete(article_obj)
+def delete_article(article_object: am.ArticleModel):
+    article = article_object.serialize()
+    db.session.delete(article_object)
     db.session.commit()
 
     return article

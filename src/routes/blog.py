@@ -15,8 +15,10 @@ main = Blueprint('blog_blueprint', __name__)
 
 @main.route('/', methods=['GET'])
 def index():
+    print("index called", flush=True)
     try:
         articles = ArticleController.get_articles()
+        print("Returning template index", flush=True)
         return render_template('index.html', articles = articles)
     except Exception as e:
         print(traceback.format_exc())
@@ -105,15 +107,15 @@ def fetch_edited_article_data():
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
-
-
-@main.route('/delete/<string:id>', methods=['DELETE'])
+@main.route('/delete', methods=['DELETE'])
 @login_required
-def delete_article(id: str):
+def delete_article():
     try:
+        id = request.json['data']
+        print(id, flush=True)
         requested_article = ArticleController.get_article_by_id(id)
-        article = ArticleController.delete(article_obj = requested_article)
-        return jsonify(article)
+        article = ArticleController.delete(article_object = requested_article)
+        return jsonify({'success': True}), 200
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500

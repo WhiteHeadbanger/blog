@@ -1,5 +1,5 @@
 body {
-    background: #110f16;
+    background: #121212;
 }
 
 .container {
@@ -17,10 +17,25 @@ footer {
 #intro {
     /* Margin to fix overlapping fixed navbar */
     margin-top: 58px;
-    /* background: #2a2c3b; */
+    background: #301E67;
     color: white;
+    position: relative;
+    line-height: 3rem;
 }
 
+#intro .subtitle {
+    position: absolute;
+    right: 60em;
+    top: 3em;
+}
+
+#intro .subtitle h3 {
+    display: inline-block;
+}
+
+#intro #subtitle-accent {
+    color: #B6EADA;
+}
 
 @media (max-width: 991px) {
     #intro {

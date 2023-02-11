@@ -49,6 +49,6 @@ class ArticleController:
         return article
     
     @classmethod
-    def delete(cls, article_obj):
-        article = delete_article(article_obj)
-        return {"deleted": article}
+    def delete(cls, article_object):
+        article = delete_article(article_object = article_object)
+        return article

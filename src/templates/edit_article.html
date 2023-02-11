@@ -26,6 +26,7 @@
     <br>
     <button onclick="Save()">Save</button>
 </form>
+<button onclick="Delete()">Delete</button>
 <style>
     #editorjs {
         border: 1px solid rgb(57, 57, 57);
@@ -132,6 +133,25 @@
                     console.log(error);
                 }
             });
+        });
+    };
+
+    function Delete() {
+        $.ajax({
+            url: 'http://127.0.0.1:5000/blog/delete',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({'data': '{{ article.id|safe }}'}),
+            type: 'DELETE',
+            success: function(e) {
+                console.log(e);
+                window.location.href = '/blog'
+            },
+            error: function(e) {
+                console.log("Error");
+                console.log(e)
+                /* window.location.href = '/blog' */
+            }
         });
     };
 </script>
