@@ -1,0 +1,59 @@
+.about-container {
+    background-color: var(--surface-elevation-1);
+    text-align: center;
+}
+
+.about-container h2 {
+    color: var(--font-medium-emphasis);
+}
+
+.about-container .white {
+    color: var(--font-high-emphasis);
+}
+
+.about-container .about-pic {
+    margin-top: 3.5em;
+}
+
+.about-container .about-pic img{
+    width: 300px;
+    float: left;
+    padding: 0 1.5em;
+}
+
+.about-text {
+    font-size: 17px;
+    padding: 0 1.5em;
+    text-align: left;
+}
+
+.about-text a {
+    text-decoration: none;
+    color: var(--secondary);
+}
+
+hr {
+    width: 30%;
+    text-align: center;
+    margin: auto;
+    color: var(--font-low-emphasis);
+}
+
+.dots-separator {
+    text-align: center;
+    font-size: 4rem;
+    line-height: 2rem;
+}
+
+.about-text .links {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.links .link-icons {
+    font-size: 3rem;
+}
+
+.links .link-icons .fa-brands {
+    margin: 1em 1em;
+}

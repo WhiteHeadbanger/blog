@@ -144,6 +144,10 @@ def delete_profile():
 # About, Socials, etc
 ##############################################################
 
-@main.route('/about')
+@main.route('/about', methods=['GET'])
 def about():
-    pass
+    try:
+        return render_template('about.html')
+    except Exception as e:
+        print(traceback.format_exc())
+        return jsonify({'data':str(e)}), 500

@@ -20,18 +20,12 @@
 
 {% block content %}
 <form action="{{ url_for('blog_blueprint.create_article_post') }}" method="post">
-    <input type="text" class="article-title" name="article-title" placeholder="New Article">
+    <input type="text" class="article-title" name="article-title" placeholder="Title">
     <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
     <div id="editorjs"></div>
     <br>
     <button onclick="Save()">Save</button>
 </form>
-<style>
-    #editorjs {
-        border: 1px solid rgb(57, 57, 57);
-        background-color: rgb(18, 18, 18);
-    }
-</style>
 <script>
 
     const editor = new EditorJS({

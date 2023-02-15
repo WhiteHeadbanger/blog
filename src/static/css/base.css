@@ -1,40 +1,62 @@
-body {
-    background: #121212;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Poppins&display=swap');
+
+:root {
+    --primary: #b695f1; /* 200 tonal */
+    --surface: #121212;
+    --secondary: #fdced4;
+    --intro-font-color: #000000;
+    --font-high-emphasis: #FFFFFF;
+    --font-medium-emphasis: #FFFFFF90;
+    --font-low-emphasis: #FFFFFF60;
+    --footer-heart: red;
+    --surface-elevation-1: #FFFFFF09;
 }
 
-.container {
-    color: white;
+.vertical-line {
+    border-left: 1px solid var(--font-low-emphasis);
+    height: max-content;
+}
+
+body {
+    background: var(--surface);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     height: 3em;
+    margin-top: auto;
+
+}
+
+footer div {
+    background-color: var(--surface-elevation-1);
+    color: var(--font-low-emphasis);
+}
+
+.container {
+    color: var(--font-high-emphasis);
 }
 
 #intro {
     /* Margin to fix overlapping fixed navbar */
     margin-top: 58px;
-    background: #301E67;
-    color: white;
+    background: var(--primary);
+    color: var(--intro-font-color);
     position: relative;
     line-height: 3rem;
+    font-family: 'Patua One', cursive;
 }
 
-#intro .subtitle {
-    position: absolute;
-    right: 60em;
-    top: 3em;
+#intro .min-about {
+    font-size: 20px;
 }
 
-#intro .subtitle h3 {
-    display: inline-block;
-}
-
-#intro #subtitle-accent {
-    color: #B6EADA;
+.fa-heart {
+    color: var(--footer-heart);
 }
 
 @media (max-width: 991px) {

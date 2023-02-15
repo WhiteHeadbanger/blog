@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+{% block content %}
+
+<div class="container py-4 about-container">
+    <h2>Hello there, my name is Sebastiana Peralta, but you can call me <span class="white">White</span>.</h2>
+    <div class="about-pic">
+        <img src="{{ url_for('static', filename='images/about-picture.jpg')}}" alt="">
+    </div>
+    <div class="about-text">
+        <p>
+            I'm a self-taught Python programmer, 29, based in the beautiful city of Buenos Aires, Argentina.
+            I'm passionate about tech, software and programming. I started toying with tech at the age of
+            12, disarming toys and playing with it's battery and a few other parts like the LEDS and moving parts.
+            <br><br>
+            While still in primary studies, I came across a most known RPG Engine called "RPG Maker", in which a Ruby-based
+            language was used: RGSS. Although I didn't accomplish much in there, that was the start of my curiosity within the programming world.
+            Later I would study to become an Electronic Technician, where I would learn microcontrollers, Assembly and C, which I enjoyed
+            beyond comprehention. I remember staying late in school just programming the end of year project, in assembly.
+            Right now I forgot most of the language, but that experiences molded my head and interests to learn more.
+            <br><br>
+            A few years later I started learning Python, and from there I couldn't stop. I 💖 the 🐍 :D
+            <br><br>
+            As a child I had always a dream: to have my own OS. Sure, it is an idealistic dream, and so far the closest that I have come to
+            this dream is my <a href="https://github.com/WhiteHeadbanger/FileSystem">Virtual File System sim</a>, which is still in development (And I think it will be forever).
+            <br><br>
+            Other interests I have are Heavy Metal 🤘, gaming 🎮, reading 📚, watching series (are you watching The Last Of Us?!) and movies 🍿, or just have a beer with friends! 🍻
+            Also, I'm a total fan of the Star Wars universe and Darth Vader 💖
+        </p>
+        <hr>
+        <div class="dots-separator">
+            . <br>
+            . <br>
+            .
+        </div>
+        <div class="links">
+            <div class="link-icons">
+                <a href="https://www.linkedin.com/in/sebastianaper/"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/WhiteHeadbanger"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -4,7 +4,8 @@ from uuid import uuid4
 from database.db import db
 
 def get_articles():
-    return am.ArticleModel.query.all()
+    #return am.ArticleModel.query.all()
+    return am.ArticleModel.query.order_by(am.ArticleModel.date_created.desc()).all()
 
 def get_article_by_id(id: str):
     return am.ArticleModel.query.filter_by(id = id).one()
