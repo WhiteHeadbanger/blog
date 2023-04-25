@@ -39,6 +39,8 @@ footer div {
 
 .container {
     color: var(--font-high-emphasis);
+    padding-right: 0;
+    padding-left: 0;
 }
 
 #intro {
