@@ -5,11 +5,11 @@ from flask_bcrypt import Bcrypt
 from config import config
 from database.db import db
 
-# Routes
-from routes import blog, auth
-
 app = Flask(__name__)
 _bcrypt = Bcrypt(app)
+
+# Routes
+from routes import blog, auth
 
 if __name__ == '__main__':
     # Config
@@ -35,5 +35,7 @@ if __name__ == '__main__':
     # Blueprints
     app.register_blueprint(blog.main, url_prefix='/blog')
     app.register_blueprint(auth.auth, url_prefix='/auth')
+
+    print(app.blueprints, flush=True)
 
     app.run()
