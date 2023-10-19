@@ -13,7 +13,7 @@ from routes import blog, auth
 
 if __name__ == '__main__':
     # Config
-    app.config.from_object(config['development'])
+    app.config.from_object(config['production'])
 
     #database
     db.init_app(app)
