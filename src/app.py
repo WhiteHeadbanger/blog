@@ -38,4 +38,4 @@ if __name__ == '__main__':
 
     #print(app.blueprints, flush=True)
 
-    app.run(host='localhost', port=3000)
+    #app.run(host='localhost', port=3000)
