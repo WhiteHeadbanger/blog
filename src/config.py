@@ -5,8 +5,12 @@ class Config:
     SQLALCHEMY_DATABASE_URI = config('SQLALCHEMY_DATABASE_URI')
 
 class DevelopmentConfig(Config):
+    DEBUG = False
+
+class ProductionConfig(Config):
     DEBUG = True
 
 config = {
-    'development': DevelopmentConfig
+    'development': DevelopmentConfig,
+    'production': ProductionConfig
 }
