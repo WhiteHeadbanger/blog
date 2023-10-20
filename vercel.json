@@ -5,5 +5,7 @@
             "maxDuration": 10
         }
     },
-    "installCommand": "pip install -r requirements.txt"
+    "buildCommand": "cd api;flask run -p 3000",
+    "installCommand": "pip install -r requirements.txt",
+    "outputDirectory": "./api/templates"
 }
