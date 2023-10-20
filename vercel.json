@@ -12,6 +12,6 @@
             "dest": "/api"
         }
     ],
-    "installCommand": "pip install -r requirements.txt",
+    "buildCommand": "pip install -r requirements.txt",
     "outputDirectory": "./api/templates"
 }
