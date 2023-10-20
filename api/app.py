@@ -36,6 +36,6 @@ if __name__ == '__main__':
     app.register_blueprint(blog.main, url_prefix='/blog')
     app.register_blueprint(auth.auth, url_prefix='/auth')
 
-    print(app.blueprints, flush=True)
+    #print(app.blueprints, flush=True)
 
     #app.run(host='localhost', port=3000)
