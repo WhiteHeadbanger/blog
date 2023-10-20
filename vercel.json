@@ -5,11 +5,5 @@
             "maxDuration": 10
         }
     },
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/api/app.py"
-      }
-    ],
     "installCommand": "pip install -r requirements.txt"
   }
