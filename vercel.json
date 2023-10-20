@@ -1,6 +1,6 @@
 {
     
-    "buildCommand": "cd api;flask run",
+    "buildCommand": "cd api;flask run -p 3000",
     "installCommand": "pip install -r requirements.txt",
     "outputDirectory": "/api/templates"
 }
