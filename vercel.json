@@ -1,6 +1,6 @@
 {
     "functions": {
-        "src/*.py": {
+        "api/*.py": {
             "memory": 1024,
             "maxDuration": 10
         }
@@ -8,7 +8,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/src/app.py"
+        "dest": "/api/app.py"
       }
     ],
     "installCommand": "pip install -r requirements.txt"
