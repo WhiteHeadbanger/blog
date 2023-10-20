@@ -12,6 +12,6 @@
             "dest": "/api"
         }
     ],
-    "buildCommand": "pip install -r requirements.txt",
+    "buildCommand": "@vercel/python",
     "outputDirectory": "./api/templates"
 }
