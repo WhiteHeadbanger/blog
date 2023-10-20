@@ -11,5 +11,7 @@
             "src": "/api/(.*)",
             "dest": "/api"
         }
-    ]
+    ],
+    "installCommand": "pip install -r requirements.txt",
+    "outputDirectory": "./api/templates"
 }
