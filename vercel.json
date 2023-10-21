@@ -18,6 +18,5 @@
             "src": "/(.*)",
             "dest": "api/app.py"
         }
-    ],
-    "outputDirectory": "api/templates"
+    ]
 }
