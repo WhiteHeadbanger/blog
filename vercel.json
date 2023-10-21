@@ -9,8 +9,8 @@
             "use": "@vercel/static"
         },
         {
-            "src": "api/templates/**",
-            "use": "@vercel/templates"
+            "src": "api/templates/*.html",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
