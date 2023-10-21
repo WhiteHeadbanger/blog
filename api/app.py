@@ -32,6 +32,9 @@ def load_user(user_id):
 # Migrate
 migrate = Migrate(app, db)
 
+with app.app_context():
+    db.create_all()
+
 # Blueprints
 app.register_blueprint(blog.main, url_prefix='/blog')
 app.register_blueprint(auth.auth, url_prefix='/auth')
