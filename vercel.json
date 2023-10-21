@@ -7,6 +7,10 @@
         {
             "src": "api/static/**",
             "use": "@vercel/static"
+        },
+        {
+            "src": "api/templates/**",
+            "use": "@vercel/templates"
         }
     ],
     "routes": [
