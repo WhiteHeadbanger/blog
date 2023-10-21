@@ -23,7 +23,7 @@ if __name__ == '__main__':
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from models.UserModel import UserModel
+    from .models.UserModel import UserModel
     
     @login_manager.user_loader
     def load_user(user_id):
