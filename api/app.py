@@ -38,4 +38,4 @@ migrate = Migrate(app, db)
 app.register_blueprint(blog.main)
 app.register_blueprint(auth.auth)
 
-app.run()
+#app.run()
