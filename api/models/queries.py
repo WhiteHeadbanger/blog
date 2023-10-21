@@ -1,7 +1,7 @@
 from . import ArticleModel as am
 from . import UserModel as um
 from uuid import uuid4
-from database.db import db
+from ..database.db import db
 
 def get_articles():
     #return am.ArticleModel.query.all()

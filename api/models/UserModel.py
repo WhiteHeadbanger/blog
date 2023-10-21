@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from database.db import db
+from ..database.db import db
 from typing import Dict
 
 class UserModel(UserMixin, db.Model):

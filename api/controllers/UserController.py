@@ -1,7 +1,7 @@
-from app import _bcrypt
-from models.queries import get_user_by_username, create_user, get_user_by_uid
-from exceptions.signup_exceptions import SignUpPasswordsDontMatchError, SignUpUserAlreadyExistsError
-from exceptions.login_exceptions import LoginUserNotFoundError, LoginWrongPasswordError
+from ..app import _bcrypt
+from ..models.queries import get_user_by_username, create_user, get_user_by_uid
+from ..exceptions.signup_exceptions import SignUpPasswordsDontMatchError, SignUpUserAlreadyExistsError
+from ..exceptions.login_exceptions import LoginUserNotFoundError, LoginWrongPasswordError
 
 class UserController:
 

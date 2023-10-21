@@ -4,7 +4,7 @@ from flask_login import login_user, login_required, logout_user
 from uuid import uuid4
 
 # Controllers
-from controllers.UserController import UserController
+from ..controllers.UserController import UserController
 
 auth = Blueprint('auth', __name__)
 

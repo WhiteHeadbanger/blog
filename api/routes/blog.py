@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 import traceback
 
 # Controllers
-from controllers.ArticleController import ArticleController
+from ..controllers.ArticleController import ArticleController
 
 main = Blueprint('blog_blueprint', __name__)
 

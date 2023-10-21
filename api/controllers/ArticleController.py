@@ -1,4 +1,4 @@
-from models.queries import get_article_by_id, get_article_by_uid, get_articles, create_article, edit_article, delete_article, get_user_by_uid
+from ..models.queries import get_article_by_id, get_article_by_uid, get_articles, create_article, edit_article, delete_article, get_user_by_uid
 
 from uuid import uuid4
 
