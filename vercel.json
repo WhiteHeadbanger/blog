@@ -3,6 +3,10 @@
         {
             "src": "api/app.py",
             "use": "@vercel/python"
+        },
+        {
+            "src": "api/static/**",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
@@ -10,5 +14,6 @@
             "src": "/(.*)",
             "dest": "api/app.py"
         }
-    ]
+    ],
+    "outputDirectory": "api/templates"
 }
