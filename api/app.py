@@ -38,4 +38,4 @@ if __name__ == '__main__':
     app.register_blueprint(blog.main)
     app.register_blueprint(auth.auth)
 
-    #app.run(host='localhost', port=3000)
+    app.run()
