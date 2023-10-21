@@ -11,31 +11,31 @@ _bcrypt = Bcrypt(app)
 # Routes
 from .routes import blog, auth
 
-if __name__ == '__main__':
-    # Config
-    app.config.from_object(config['production'])
+#if __name__ == '__main__':
+# Config
+app.config.from_object(config['production'])
 
-    #database
-    db.init_app(app)
+#database
+db.init_app(app)
 
-    # Flask-login
-    login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
-    login_manager.init_app(app)
+# Flask-login
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
 
-    from .models.UserModel import UserModel
-    
-    @login_manager.user_loader
-    def load_user(user_id):
-        return UserModel.query.get(user_id)
+from .models.UserModel import UserModel
 
-    # Migrate
-    migrate = Migrate(app, db)
+@login_manager.user_loader
+def load_user(user_id):
+    return UserModel.query.get(user_id)
 
-    # Blueprints
-    #app.register_blueprint(blog.main, url_prefix='/blog')
-    #app.register_blueprint(auth.auth, url_prefix='/auth')
-    app.register_blueprint(blog.main)
-    app.register_blueprint(auth.auth)
+# Migrate
+migrate = Migrate(app, db)
 
-    app.run()
+# Blueprints
+#app.register_blueprint(blog.main, url_prefix='/blog')
+#app.register_blueprint(auth.auth, url_prefix='/auth')
+app.register_blueprint(blog.main)
+app.register_blueprint(auth.auth)
+
+app.run()
