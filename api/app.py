@@ -3,13 +3,13 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from ._config import config
-from database.db import db
+from .database.db import db
 
 app = Flask(__name__)
 _bcrypt = Bcrypt(app)
 
 # Routes
-from routes import blog, auth
+from .routes import blog, auth
 
 if __name__ == '__main__':
     # Config
