@@ -2,7 +2,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
-from _config import config
+from ._config import config
 from database.db import db
 
 app = Flask(__name__)
