@@ -58,7 +58,7 @@ def create_article_post():
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
         return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
     except Exception as e:
-        print(traceback.format_exc())
+        #print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
 @main.route('/edit/<string:id>', methods=['GET'])
