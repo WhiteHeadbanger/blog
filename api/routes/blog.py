@@ -90,6 +90,7 @@ def fetch_new_article_data():
         data = request.get_json()
         session["new_article_data"] = ""
         session["new_article_data"] = data
+        print(session, flush=True)
         return redirect(url_for('blog_blueprint.create_article_post'))
     except Exception as e:
         print(traceback.format_exc())
