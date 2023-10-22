@@ -80,7 +80,7 @@ def edit_article_put():
         article = ArticleController.edit(title = title, brief_description = brief, json_data = data, article_id = article_id)
         return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
     except Exception as e:
-        print(traceback.format_exc())
+        #print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
 @main.route('/fetch-data', methods=['POST'])
@@ -92,7 +92,7 @@ def fetch_new_article_data():
         session["new_article_data"] = data
         return redirect(url_for('blog_blueprint.create_article_post'))
     except Exception as e:
-        print(traceback.format_exc())
+        #print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
 @main.route('/fetch-data', methods=['PUT'])
@@ -104,7 +104,7 @@ def fetch_edited_article_data():
         session["edited_article_data"] = data
         return redirect(url_for('blog_blueprint.edit_article_put'))
     except Exception as e:
-        print(traceback.format_exc())
+        #print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
 @main.route('/delete', methods=['DELETE'])
@@ -117,7 +117,7 @@ def delete_article():
         article = ArticleController.delete(article_object = requested_article)
         return jsonify({'success': True}), 200
     except Exception as e:
-        print(traceback.format_exc())
+        #print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
     
 
