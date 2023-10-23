@@ -51,7 +51,7 @@ def create():
 @login_required
 def create_article_post():
     try:
-        data = session["new_article_data"]
+        data = session.get('new_article_data', None)
         title = request.form.get("article-title")
         brief = request.form.get("brief-description")
         uid = current_user.id
