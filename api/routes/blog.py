@@ -83,7 +83,7 @@ def edit_article_put():
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
-@main.route('/fetch-data', methods=['POST'])
+@main.route('/fetch-data', methods=['GET'])
 @login_required
 def fetch_new_article_data():
     try:

@@ -87,9 +87,10 @@
 </script>
 <script>
     function Save() {
+        console.log(outputData);
         editor.save().then((outputData) => {
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 contentType: 'application/json',
                 data: JSON.stringify(outputData),
                 dataType: 'json',
