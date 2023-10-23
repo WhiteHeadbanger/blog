@@ -91,7 +91,7 @@ def fetch_new_article_data():
         #session["new_article_data"] = ""
         #session["new_article_data"] = data
         print(session, flush=True)
-        return redirect(url_for('blog_blueprint.create_article_post'), _method = 'POST', data = data)
+        return redirect(url_for('blog_blueprint.create_article_post', _method = 'POST', data = data))
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
