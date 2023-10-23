@@ -87,8 +87,8 @@
 </script>
 <script>
     function Save() {
-        console.log(outputData);
         editor.save().then((outputData) => {
+            console.log(outputData);
             $.ajax({
                 type: 'GET',
                 contentType: 'application/json',
@@ -100,7 +100,7 @@
                     console.log(e);
                 },
                 error: function(error) {
-                    console.log(error);
+                    console.log('Hubo un error: ' + error);
                 }
             });
         });
