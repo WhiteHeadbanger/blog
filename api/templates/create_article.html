@@ -86,6 +86,8 @@
     
 </script>
 <script>
+    var currentHost = window.location.hostname;
+
     function Save() {
         editor.save().then((outputData) => {
             console.log(outputData);
@@ -94,7 +96,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(outputData),
                 dataType: 'json',
-                url: 'https://blog-teal-three-22.vercel.app/fetch-data',
+                url: 'https://' + currentHost + '/fetch-data',
                 success: function (e) {
                     console.log('success callback called');
                     console.log(e);

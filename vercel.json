@@ -12,7 +12,7 @@
         },
         {
             "src": "api/(.*)",
-            "headers": {"Access-Control-Allow-Origin": "https://blog-teal-three-22.vercel.app"},
+            "headers": {"Access-Control-Allow-Origin": "*"},
             "continue": true
         }
     ]
