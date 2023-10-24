@@ -97,9 +97,9 @@
         editor.save().then((outputData) => {
             outputData.formTitle = title
             outputData.formDescription = description
-            
+
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(outputData),
                 dataType: 'json',
