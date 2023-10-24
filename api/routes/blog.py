@@ -51,16 +51,12 @@ def create():
 def create_article_post():
     try:
         data = request.get_json()
-        #data = session.get('new_article_data', None)
-        #title = request.form.get("article-title")
-        #brief = request.form.get("brief-description")
         title = data.pop('formTitle')
         brief = data.pop('formDescription')
-        #print(title, brief, flush=True)
         uid = current_user.id
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
-        #session["new_article_data"] = ""
-        return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
+        #return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
+        return jsonify({'redirect': url_for('blog_blueprint.get_article_by_id', id=article['id'])})
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500

@@ -121,6 +121,11 @@
                 success: function (e) {
                     console.log('success callback called');
                     console.log(e);
+
+                    if (e.redirect) {
+                        // Redirect to the specified URL
+                        window.location.href = e.redirect;
+                    }
                 },
                 error: function(error) {
                     console.log('Hubo un error: ' + error);
