@@ -49,9 +49,9 @@ def create():
 
 @main.route('/create', methods=['POST'])
 @login_required
-def create_article_post(data):
+def create_article_post():
     try:
-        #data = session.get('new_article_data', None)
+        data = session.get('new_article_data', None)
         title = request.form.get("article-title")
         brief = request.form.get("brief-description")
         uid = current_user.id
@@ -89,9 +89,9 @@ def fetch_new_article_data():
     try:
         data = request.get_json()
         #session["new_article_data"] = ""
-        #session["new_article_data"] = data
+        session["new_article_data"] = data
         print(session, flush=True)
-        return redirect(url_for('blog_blueprint.create_article_post', _method = 'POST', data = data))
+        return redirect(url_for('blog_blueprint.create_article_post', _method = 'POST'))
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
