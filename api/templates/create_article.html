@@ -97,9 +97,9 @@
         var description = form.get('brief-description');
 
         editor.save().then((outputData) => {
-            outputData.formTitle = title
-            outputData.formDescription = description
-            
+            outputData.formTitle = title;
+            outputData.formDescription = description;
+            console.log(outputData);
             // Check if outputData is valid JSON
             try {
                 JSON.parse(JSON.stringify(outputData));

@@ -55,7 +55,6 @@ def create_article_post():
         brief = data.pop('formDescription')
         uid = current_user.id
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
-        #return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
         return jsonify({'redirect': url_for('blog_blueprint.get_article_by_id', id=article['id'])})
     except Exception as e:
         print(traceback.format_exc())
