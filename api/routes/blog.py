@@ -56,7 +56,7 @@ def create_article_post():
         #brief = request.form.get("brief-description")
         title = data.pop('formTitle')
         brief = data.pop('formDescription')
-        print(title, brief, flush=True)
+        #print(title, brief, flush=True)
         uid = current_user.id
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
         #session["new_article_data"] = ""

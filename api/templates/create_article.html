@@ -101,9 +101,12 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
-                body: JSON.stringify(outputData),
+                data: JSON.stringify(outputData),
                 dataType: 'json',
                 url: "{{ url_for('blog_blueprint.create_article_post') }}",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 //url: 'https://' + currentHost + '/fetch-data',
                 success: function (e) {
                     console.log('success callback called');
