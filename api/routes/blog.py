@@ -18,7 +18,6 @@ def index():
     print("index called", flush=True)
     try:
         articles = ArticleController.get_articles()
-        print("Returning template index", flush=True)
         return render_template('index.html', articles = articles)
     except Exception as e:
         print(traceback.format_exc())
@@ -83,12 +82,13 @@ def edit_article_put():
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
 
-@main.route('/fetch-data', methods=['GET'])
+@main.route('/fetch-data', methods=['POST'])
 @login_required
 def fetch_new_article_data():
     try:
         data = request.get_json()
-        #session["new_article_data"] = ""
+        print(data, flush=True)
+        session["new_article_data"] = ""
         session["new_article_data"] = data
         print(session, flush=True)
         return redirect(url_for('blog_blueprint.create_article_post', _method = 'POST'))
