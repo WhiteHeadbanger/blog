@@ -25,7 +25,9 @@
     <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
     <div id="editorjs"></div>
     <br>
-    <button onsubmit="Save()">Save</button>
+    <!-- Prevent the default form submission and handle the data submission via AJAX instead.
+    Call Save function and return false to prevent the form submission. --> 
+    <button onsubmit="Save(); return false;">Save</button>
 </form>
 <script>
 
