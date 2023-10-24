@@ -50,11 +50,15 @@ def create():
 @login_required
 def create_article_post():
     try:
-        data = session.get('new_article_data', None)
-        title = request.form.get("article-title")
-        brief = request.form.get("brief-description")
+        data = request.get_json()
+        #data = session.get('new_article_data', None)
+        #title = request.form.get("article-title")
+        #brief = request.form.get("brief-description")
+        title = data.pop('formTitle')
+        brief = data.pop('formDescription')
         uid = current_user.id
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
+        #session["new_article_data"] = ""
         return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
     except Exception as e:
         print(traceback.format_exc())
@@ -87,10 +91,7 @@ def edit_article_put():
 def fetch_new_article_data():
     try:
         data = request.get_json()
-        print(data, flush=True)
-        session["new_article_data"] = ""
         session["new_article_data"] = data
-        print(session, flush=True)
         return redirect(url_for('blog_blueprint.create_article_post', _method = 'POST'))
     except Exception as e:
         print(traceback.format_exc())

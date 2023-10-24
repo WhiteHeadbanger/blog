@@ -19,12 +19,13 @@
 {% endblock %}
 
 {% block content %}
-<form action="{{ url_for('blog_blueprint.create_article_post') }}" method="post">
+<!-- action="{{ url_for('blog_blueprint.create_article_post') }}" -->
+<form method="post" id="form_article">
     <input type="text" class="article-title" name="article-title" placeholder="Title">
     <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
     <div id="editorjs"></div>
     <br>
-    <button onclick="Save()">Save</button>
+    <button onsubmit="Save()">Save</button>
 </form>
 <script>
 
@@ -89,14 +90,21 @@
     var currentHost = window.location.hostname;
 
     function Save() {
+        var form = new FormData(document.getElementById("form_article"));
+        var title = form.get('article-title');
+        var description = form.get('brief-description');
+
         editor.save().then((outputData) => {
-            console.log(outputData);
+            outputData.formTitle = title
+            outputData.formDescription = description
+            
             $.ajax({
-                type: 'POST',
+                type: 'GET',
                 contentType: 'application/json',
                 data: JSON.stringify(outputData),
                 dataType: 'json',
-                url: 'https://' + currentHost + '/fetch-data',
+                url: "{{ url_for('blog_blueprint.create_article_post') }}",
+                //url: 'https://' + currentHost + '/fetch-data',
                 success: function (e) {
                     console.log('success callback called');
                     console.log(e);
