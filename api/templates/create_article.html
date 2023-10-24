@@ -97,7 +97,15 @@
         editor.save().then((outputData) => {
             outputData.formTitle = title
             outputData.formDescription = description
-            console.log(outputData)
+            
+            // Check if outputData is valid JSON
+            try {
+                JSON.parse(JSON.stringify(outputData));
+            } catch (e) {
+                console.error("Invalid JSON data: " + e);
+                return;
+            }
+
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
