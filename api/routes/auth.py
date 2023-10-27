@@ -6,6 +6,7 @@ from ..controllers.UserController import UserController
 
 auth = Blueprint('auth', __name__)
 
+'''
 @auth.route('/signup', methods=['GET'])
 def signup():
     """Renders the sign up page
@@ -14,6 +15,7 @@ def signup():
         function: render_template('signup.html')
     """
     return render_template('signup.html')
+
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
@@ -30,7 +32,8 @@ def signup_post():
         error_message = str(e)
         flash(error_message, category="error")
         return render_template('signup.html', error=error_message), 500
-
+'''
+        
 @auth.route('/login', methods = ['GET'])
 def login():
     """Renders the login page
