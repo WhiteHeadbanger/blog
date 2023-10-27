@@ -55,7 +55,7 @@ def create_article_post():
         brief = data.pop('formDescription')
         uid = current_user.id
         article = ArticleController.create(uid = uid, title = title, json_data = data, brief_description = brief)
-        return jsonify({'redirect': url_for('blog_blueprint.get_article_by_id', id=article['id'])})
+        return jsonify({'redirect': url_for('blog_blueprint.get_article_by_id', id=article.get('id'))})
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -64,43 +64,21 @@ def create_article_post():
 @login_required
 def edit_article(id: str):
     article = ArticleController.get_article_by_id(id)
+    if article is None:
+        return redirect(url_for('blog_blueprint.index', _method='GET'))
     session["article_id"] = article.id
     return render_template('edit_article.html', article = article)
 
-@main.route('/edit', methods=['GET','PUT'])
+@main.route('/edit', methods=['PUT'])
 @login_required
 def edit_article_put():
     try:
-        title = request.args.get("article-title")
-        brief = request.args.get("brief-description")
-        data = session["edited_article_data"]
+        data = request.get_json()
+        title = data.pop('formTitle')
+        brief = data.pop('formDescription')
         article_id = session["article_id"]
-        session["article_to_edit_object"] = ""
         article = ArticleController.edit(title = title, brief_description = brief, json_data = data, article_id = article_id)
-        return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article['id']))
-    except Exception as e:
-        print(traceback.format_exc())
-        return jsonify({'data':str(e)}), 500
-
-@main.route('/fetch-data', methods=['POST'])
-@login_required
-def fetch_new_article_data():
-    try:
-        data = request.get_json()
-        session["new_article_data"] = data
-        return redirect(url_for('blog_blueprint.create_article_post', _method = 'POST'))
-    except Exception as e:
-        print(traceback.format_exc())
-        return jsonify({'data':str(e)}), 500
-
-@main.route('/fetch-data', methods=['PUT'])
-@login_required
-def fetch_edited_article_data():
-    try:
-        data = request.get_json()
-        session["edited_article_data"] = ""
-        session["edited_article_data"] = data
-        return redirect(url_for('blog_blueprint.edit_article_put'))
+        return redirect(url_for('blog_blueprint.get_article_by_id', _method = 'GET', id = article.get('id')))
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500
@@ -109,11 +87,10 @@ def fetch_edited_article_data():
 @login_required
 def delete_article():
     try:
-        id = request.json['data']
-        print(id, flush=True)
-        requested_article = ArticleController.get_article_by_id(id)
+        data = request.get_json()
+        requested_article = ArticleController.get_article_by_id(data.get('data'))
         article = ArticleController.delete(article_object = requested_article)
-        return jsonify({'success': True}), 200
+        return redirect(url_for('blog_blueprint.index', _method='GET'))
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({'data':str(e)}), 500

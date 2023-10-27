@@ -19,7 +19,6 @@
 {% endblock %}
 
 {% block content %}
-<!-- action="{{ url_for('blog_blueprint.create_article_post') }}" -->
 <form method="post" id="form_article">
     <input type="text" class="article-title" name="article-title" placeholder="Title">
     <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
@@ -89,8 +88,6 @@
     
 </script>
 <script>
-    var currentHost = window.location.hostname;
-
     function Save() {
         var form = new FormData(document.getElementById("form_article"));
         var title = form.get('article-title');
@@ -117,7 +114,6 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                //url: 'https://' + currentHost + '/fetch-data',
                 success: function (e) {
                     console.log('success callback called');
                     console.log(e);

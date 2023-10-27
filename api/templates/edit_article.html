@@ -19,13 +19,13 @@
 {% endblock %}
 
 {% block content %}
-<form action="{{ url_for('blog_blueprint.edit_article_put') }}" method="GET">
+<form id="form_article">
     <input type="text" class="article-title" id="article-title" name="article-title" placeholder="New Article">
     <textarea name="brief-description" id="brief-description" cols="30" rows="10" placeholder="Brief description..."></textarea>
     <div id="editorjs"></div>
     <br>
-    <button onclick="Save()">Save</button>
-    <button onclick="Delete()">Delete</button>    
+    <button onclick="Save(); return false;">Save</button>
+    <button onclick="Delete(); return false;">Delete</button>    
 </form>
 <script>
 
@@ -111,16 +111,37 @@
 </script>
 <script>
     function Save() {
+        var form = new FormData(document.getElementById("form_article"));
+        var title = form.get('article-title');
+        var description = form.get('brief-description');
+
         editor.save().then((outputData) => {
+            outputData.formTitle = title;
+            outputData.formDescription = description;
+
+            try {
+                JSON.parse(JSON.stringify(outputData));
+            } catch (e) {
+                console.error("Invalid JSON data: " + e);
+                return;
+            }
+
             $.ajax({
                 type: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(outputData),
                 dataType: 'json',
-                url: 'blog-teal-three-22.vercel.app/blog/fetch-data',
+                url: "{{ url_for('blog_blueprint.edit_article_put')}}",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 success: function (e) {
                     console.log('success callback called');
                     console.log(e);
+
+                    if (e.redirect) {
+                        window.location.href = e.redirect;
+                    }
                 },
                 error: function(error) {
                     console.log("Hubo un error")
@@ -132,14 +153,19 @@
 
     function Delete() {
         $.ajax({
-            url: 'http://127.0.0.1:5000/blog/delete',
+            url: "{{ url_for('blog_blueprint.delete_article')}}",
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({'data': '{{ article.id|safe }}'}),
             type: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             success: function(e) {
                 console.log(e);
-                window.location.href = '/blog'
+                if (e.redirect) {
+                    window.location.href = e.redirect;
+                }
             },
             error: function(e) {
                 console.log("Error");
