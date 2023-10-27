@@ -1,7 +1,5 @@
-from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user
-
-from uuid import uuid4
 
 # Controllers
 from ..controllers.UserController import UserController
