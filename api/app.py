@@ -38,7 +38,5 @@ with app.app_context():
 # Blueprints
 app.register_blueprint(blog.main)
 app.register_blueprint(auth.auth)
-#app.register_blueprint(blog.main, url_prefix='/blog')
-#app.register_blueprint(auth.auth, url_prefix='/auth')
 
 #app.run()
