@@ -15,7 +15,11 @@ main = Blueprint('blog_blueprint', __name__)
 
 @main.route('/', methods=['GET'])
 def index():
-    print("index called", flush=True)
+    """Gets all articles and then renders index.html
+
+    Returns:
+        function: render_template('index.html')
+    """
     try:
         articles = ArticleController.get_articles()
         return render_template('index.html', articles = articles)
@@ -34,6 +38,14 @@ def get_article_by_uid(uid: str):
 
 @main.route('/article/<string:id>', methods=['GET'])
 def get_article_by_id(id: str):
+    """Gets one article by its ID and renders a page containing the article
+
+    Args:
+        id (str): ID representation of the article
+
+    Returns:
+        function: render_template('article.html')
+    """
     try:
         article = ArticleController.get_article_by_id(id)
         return render_template('article.html', title = article.title, json_data = article.json, id = id)
@@ -44,11 +56,21 @@ def get_article_by_id(id: str):
 @main.route('/create', methods=['GET'])
 @login_required
 def create():
+    """Renders the create new article page
+
+    Returns:
+        function: render_template('create_article.html')
+    """
     return render_template('create_article.html')
 
 @main.route('/create', methods=['POST'])
 @login_required
 def create_article_post():
+    """Gets json data from the new article form and creates the article
+
+    Returns:
+        function: jsonify a redirect route pointing to the recently created article
+    """
     try:
         data = request.get_json()
         title = data.pop('formTitle')
@@ -63,6 +85,14 @@ def create_article_post():
 @main.route('/edit/<string:id>', methods=['GET'])
 @login_required
 def edit_article(id: str):
+    """Gets one article by its ID and renders the edit article page
+
+    Args:
+        id (str): ID representation of the article
+
+    Returns:
+        function: render_template('edit_article.html') | redirect to index
+    """
     article = ArticleController.get_article_by_id(id)
     if article is None:
         return redirect(url_for('blog_blueprint.index', _method='GET'))
@@ -72,6 +102,11 @@ def edit_article(id: str):
 @main.route('/edit', methods=['PUT'])
 @login_required
 def edit_article_put():
+    """Gets json data from the edited article form and modifies the article
+
+    Returns:
+        function: jsonify a redirect route pointing to the recently edited article
+    """
     try:
         data = request.get_json()
         title = data.pop('formTitle')
@@ -86,6 +121,11 @@ def edit_article_put():
 @main.route('/delete', methods=['DELETE'])
 @login_required
 def delete_article():
+    """Deletes an article
+
+    Returns:
+        function: jsonify a redirect route pointing to the recently edited article
+    """
     try:
         data = request.get_json()
         requested_article = ArticleController.get_article_by_id(data.get('data'))
@@ -121,6 +161,11 @@ def delete_profile():
 
 @main.route('/about', methods=['GET'])
 def about():
+    """Renders the about page
+
+    Returns:
+        function: render_template('about.html')
+    """
     try:
         return render_template('about.html')
     except Exception as e:
