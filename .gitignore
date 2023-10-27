@@ -1,7 +1,0 @@
-venv/
-.vscode/
-__pycache__/
-.env
-.gitignore
-api/_config.py
-api/app.py
